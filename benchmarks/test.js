@@ -10,6 +10,8 @@ let hashlru = require("hashlru");
 let simpleLruCache = require("simple-lru-cache");
 let quickLru = require("quick-lru");
 let lru = require("lru");
+let modernLru = require("modern-lru");
+let lruCache = require("lru-cache");
 
 test("Single Map", () => {
   let cache = new LRUMap(3);
@@ -45,6 +47,16 @@ test("simple-lru-cache", () => {
 test("lru", () => {
   let cache = new lru(3);
   cache.has = (k) => k in cache.cache;
+  assertCacheImpl(cache);
+});
+
+test("modern-lru", () => {
+  let cache = new modernLru(3);
+  assertCacheImpl(cache);
+});
+
+test("lru-cache", () => {
+  let cache = new lruCache({ max: 3 });
   assertCacheImpl(cache);
 });
 

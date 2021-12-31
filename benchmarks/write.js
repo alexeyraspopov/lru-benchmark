@@ -10,6 +10,8 @@ let hashlru = require("hashlru");
 let simpleLruCache = require("simple-lru-cache");
 let quickLru = require("quick-lru");
 let lru = require("lru");
+let modernLru = require("modern-lru");
+let lruCache = require("lru-cache");
 
 (async () => {
   await runWriteSuite({ capacity: 256, iterations: 256 * 8 });
@@ -60,6 +62,16 @@ function runWriteSuite({ capacity, iterations }) {
       // })
       .add("lru", () => {
         let cache = new lru(capacity);
+        for (let i = 0; i < iterations; i++) cache.set(i.toString(), i);
+        out = cache;
+      })
+      .add("modern-lru", () => {
+        let cache = new modernLru(capacity);
+        for (let i = 0; i < iterations; i++) cache.set(i.toString(), i);
+        out = cache;
+      })
+      .add("lru-cache", () => {
+        let cache = new lruCache({ max: capacity });
         for (let i = 0; i < iterations; i++) cache.set(i.toString(), i);
         out = cache;
       })
