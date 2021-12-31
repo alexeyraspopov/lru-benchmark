@@ -1,0 +1,23 @@
+{
+  "name": "lru-benchmark",
+  "scripts": {
+    "test": "node benchmark.js"
+  },
+  "author": "Alexey Raspopov",
+  "license": "ISC",
+  "devDependencies": {
+    "benchmark": "^2.1.4",
+    "picocolors": "^1.0.0",
+    "prettier": "^2.5.1"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "trailingComma": "all"
+  },
+  "dependencies": {
+    "hashlru": "^2.3.0",
+    "lru": "^3.1.0",
+    "quick-lru": "^5.1.1",
+    "simple-lru-cache": "^0.0.2"
+  }
+}
